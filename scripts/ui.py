@@ -8,7 +8,7 @@ from modules.sd_vae import vae_path
 options = ['Checkpoint', 'Lora', 'VAE']
 
 
-def download(download_url, model_type, save_file_name):
+def download(download_url, model_type, save_file_name, progress=gr.Progress(track_tqdm=True)):
     if download_url == '' or download_url is None:
         gr.Warning("请输入模型下载地址")
         return False
@@ -40,7 +40,9 @@ def ui_tab():
         with gr.Row():
             with gr.Column():
                 download_click = gr.Button(value="下载")
-                download_click.click(download, inputs=[download_url, model_type, save_file_name])
+        with gr.Row():
+            result = gr.Textbox(label="下载结果")
+        download_click.click(download, inputs=[download_url, model_type, save_file_name], outputs=[result])
         return [(tab, "模型下载助手", "model_help")]
 
 
