@@ -41,7 +41,7 @@ def ui_tab():
             with gr.Column():
                 download_click = gr.Button(value="下载")
         with gr.Row():
-            result = gr.Textbox(label="下载结果")
+            result = gr.Label(label="下载结果")
         download_click.click(download, inputs=[download_url, model_type, save_file_name], outputs=[result])
         return [(tab, "模型下载助手", "model_help")]
 
