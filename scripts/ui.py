@@ -1,6 +1,5 @@
 from scripts.downloader import Downloader
 
-import pathlib
 import shutil
 from modules import script_callbacks
 import gradio as gr
@@ -39,10 +38,7 @@ def generate_file(file_obj, model_type):
     elif model_type == 'Lora':
         base_path = f"{models_path}/Lora"
     print('上传文件的地址：{}'.format(file_obj.name))  # 输出上传后的文件在gradio中保存的绝对地址
-    # 将文件复制到临时目录中
-    shutil.copy(file_obj.name, base_path)
-    rem_file = pathlib.Path(file_obj.name)
-    rem_file.unlink()
+    shutil.move(file_obj.name, base_path)
 
 
 def ui_tab():
